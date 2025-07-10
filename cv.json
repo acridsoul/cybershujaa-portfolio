@@ -2,37 +2,37 @@
   "analyticsCode": "",
   "pageLayout": "two-column",
   "basics": {
-    "name": "MiraHikari",
+    "name": "Austin Githinji",
     "label": "Senior Full Stack Developer",
-    "image": "/avatar.png",
-    "email": "mirahikari@gcxstudio.cn",
-    "url": "https://www.gcxstudio.cn",
-    "summary": "Born in 2010, I primarily work with TypeScript and JavaScript for full-stack development, and enjoy working with various technologies.",
+    "image": "/passport.jpg",
+    "email": "devaustingithinji@gmail.com",
+    "url": "githinji.dev",
+    "summary": "A results-oriented Software Developer with over two years of experience in application and web development.  With a dedicated interest in cybersecurity, I proactively research security vulnerabilities to build more robust and secure software.    My goal is to leverage my skills in a role where I can contribute to creating secure, high-quality digital solutions",
     "theme": "red",
     "location": {
-      "address": "Nanchang",
-      "city": "Jiangxi Province",
-      "countryCode": "CN",
-      "region": "China"
+      "address": "Nairobi County",
+      "city": "Nairobi",
+      "countryCode": "KE",
+      "region": "Kenya"
     },
     "profiles": [
       {
-        "network": "Bilibili",
-        "icon": "ri:bilibili-line",
-        "username": "MiraHikari",
-        "url": "https://space.bilibili.com/480025691"
-      },
-      {
-        "network": "QQ",
-        "icon": "ri:qq-fill",
-        "username": "Gong_cx",
-        "url": "https://admin.qidian.qq.com/static_proxy/b2b-qq/wpa-link/index.html#/person?uin=3175992523"
-      },
-      {
         "network": "GitHub",
-        "icon": "mdi:github",
-        "username": "MiraHikari",
-        "url": "https://github.com/MiraHikari"
+        "icon": "ri:github-fill",
+        "username": "acridsoul",
+        "url": "https://github.com/acridsoul"
+      },
+      {
+        "network": "LinkedIn",
+        "icon": "ri:linkedin-fill",
+        "username": "your-linkedin-username",
+        "url": "https://www.linkedin.com/in/your-linkedin-username/"
+      },
+      {
+        "network": "Credly",
+        "icon": "simple-icons:credly",
+        "username": "your-credly-username",
+        "url": "https://www.credly.com/users/your-credly-username"
       }
     ],
     "beian": {
@@ -67,95 +67,54 @@
   },
   "education": [
     {
-      "institution": "Nanchang No.27 Middle School",
-      "url": "",
-      "area": "Regular Student",
+      "institution": "Mount Kenya University",
+      "area": "Bachelor of Science in Information Technology",
       "studyType": "Full-time student",
-      "startDate": "2021-9-01",
-      "endDate": null
+      "startDate": "",
+      "endDate": "2026-08-01",
+      "summary": "Expected Graduation August 2026"
     }
   ],
   "certificates": [
     {
-      "name": "Success has lived a day in the world.",
-      "date": "2010-04-14",
-      "url": "",
-      "issuer": "Myself"
+      "name": "Security Analyst Specialist",
+      "date": "2022-07-01",
+      "issuer": "Cyber Shujaa"
     },
     {
-      "name": "TCCP - Senior Cloud Architecture Engineer",
-      "date": "2023-05-01",
-      "url": "",
-      "issuer": "Tencent Cloud"
+      "name": "Ethical Hacking",
+      "date": "2022-01-01",
+      "issuer": "Udemy"
+    },
+    {
+      "name": "Certified CyberOps Associate",
+      "date": "2021-11-01",
+      "issuer": "Cisco"
     }
   ],
   "work": [
     {
-      "name": "Sgguo Development Team",
-      "position": "Full-stack Developer",
-      "location_type": "Remote",
-      "location": "CN",
-      "url": "https://github.com/Sgguo-Development-Team",
-      "startDate": "2022-06-01",
+      "name": "A.C.K. St. Stephen’s Church, Gatuanyaga",
+      "position": "IT Consultant",
+      "location_type": "Onsite",
+      "location": "Gatuanyaga, Kenya",
+      "startDate": "2022-12-01",
       "endDate": null,
-      "summary": "Developing high-availability full-stack projects.",
+      "summary": "Designed and implemented the core IT infrastructure for all pastoral and administrative activities.",
       "highlights": [
-        "Enhanced internal workflow efficiency by 30%."
-      ],
-      "responsibilities": [
-        "Developed and maintained backend services using Node.js and Golang."
-      ],
-      "achievements": [
-        "Implemented a cloud drive and verification code system."
-      ],
-      "skills": {
-        "PHP": "simple-icons:php",
-        "Node": "ri:nodejs-line",
-        "Golang": "simple-icons:go",
-        "Next.js": "ri:nextjs-fill",
-        "React": "mdi:react",
-        "SQL": "simple-icons:mysql",
-        "Git": "mdi:git",
-        "GitHub": "mdi:github",
-        "NestJS": "simple-icons:nestjs",
-        "Vue": "mdi:vuejs"
-      }
+        "Engineered and managed the church’s audio-visual systems, successfully integrating multiple screens for live services and events.",
+        "Developed and launched the official church website; integrated the Daraja API to enable M-Pesa STK push payments for offerings, streamlining the donation process.",
+        "Built a cross-platform liturgy application using Flutter, providing church services in multiple languages to enhance accessibility for the congregation."
+      ]
     },
     {
-      "name": "Riddle Town Team",
-      "position": "Full-stack Developer",
-      "location_type": "Remote",
-      "location": "CN",
-      "url": "https://rth2.gcxstudio.cn",
-      "startDate": "2023-01-01",
-      "endDate": "2024-02-11",
-      "summary": "Led page design and account systems.",
-      "highlights": [
-        "Completed 95% of project content."
-      ],
-      "responsibilities": [
-        "Developed complete pages.",
-        "Integrated user-facing elements with server-side logic."
-      ],
-      "achievements": [
-        "Ensured smooth project execution."
-      ],
-      "skills": {
-        "HTML": "simple-icons:html5",
-        "CSS": "ri:css3-fill",
-        "JavaScript": "simple-icons:javascript",
-        "TypeScript": "simple-icons:typescript",
-        "Vite": "simple-icons:vite",
-        "Node": "ri:nodejs-line",
-        "Docker": "mdi:docker",
-        "WordPress": "ri:wordpress-fill",
-        "Astro": "simple-icons:astro",
-        "SQL": "simple-icons:mysql",
-        "Tailwind": "mdi:tailwind",
-        "React": "mdi:react",
-        "GitHub": "mdi:github",
-        "Git": "mdi:git"
-      }
+      "name": "TenantMate (Academic Project)",
+      "position": "Co-developer",
+      "location_type": "Academic",
+      "location": "",
+      "startDate": "2025-01-01",
+      "endDate": "2025-04-30",
+      "summary": "Co-developed with a team of four students to design and build a Mobile App in Flutter, focusing on the Real Estate sector, with key aspects such as Maintenance Ticketing and Rent Payment Analytics."
     }
   ],
   "skills": [
@@ -497,38 +456,19 @@
   ],
   "projects": [
     {
-      "name": "Cloudflare Vmail",
-      "image": {
-        "url": "https://i0.hdslb.com/bfs/article/985e2caa8266dee4b9861ee6a341886d480025691.png@1e_1c.webp",
-        "position": "container",
-        "dark": "https://i0.hdslb.com/bfs/article/4d0bf8a784d22e54e3e61763c361c9ef480025691.png@100q_1e_1c.webp"
-      },
-      "isActive": true,
-      "description": "An open source temporary email tool, fully on Cloudflare. Inspired by oiov/vmail",
-      "highlights": [
-        "🎯 Privacy-friendly, no registration required, out-of-the-box",
-        "✨ Support saving passwords and retrieving email addresses",
-        "😄 Support multiple domain name suffixes",
-        "🚀 100% open source, fully based on Cloudflare."
-      ],
-      "url": "https://what-the-fuck.sbs",
-      "github": "https://github.com/MiraHikari/cloudflare-vmail"
+      "name": "Autofill Buddy",
+      "github": "https://github.com/acridsoul/Autofill-Buddy",
+      "description": "Programmed a Python script to automate the filling of registration forms with realistic, generated user data for testing purposes."
     },
     {
-      "name": "Riddle Town Hunt 2",
-      "image": {
-        "url": "https://rth2-webstatic.gbclstudio.cn/wp-content/uploads/2024/02/1707656250-76b2b0d2c94824e89a2b8b2c7d1c6afe.png",
-        "position": "background"
-      },
-      "isActive": false,
-      "description": "Public decryption activity in the form of Puzzle Hunt.",
-      "highlights": [
-        "👌 More than 1000 people participated, system runs normally",
-        "😮‍ Use headless CMS: WordPress to storage and manage contents, dynamically render page",
-        "😊 Windows-like interface",
-        "💕 Based on Astro"
-      ],
-      "url": "https://rth2.gcxstudio.cn/"
+      "name": "Clear Mark",
+      "github": "https://github.com/acridsoul/Clear-Mark",
+      "description": "Created a browser extension for Chrome and Firefox that enhances the viewing experience on documentary-area.com by providing high-quality video streams. Achieved community recognition with multiple stars on GitHub, demonstrating project value and user satisfaction."
+    },
+    {
+      "name": "LLM-Search",
+      "github": "https://github.com/acridsoul/llm-search",
+      "description": "Developed a browser extension that integrates a search bar into the user interfaces of popular AI chat providers. Enabled users on free tiers to search past conversations, a feature previously exclusive to paid subscribers, improving workflow and reference capabilities."
     }
   ]
 }

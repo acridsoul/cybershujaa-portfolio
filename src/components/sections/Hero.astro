@@ -51,14 +51,10 @@ const { city, region, address } = location
             )
           })
         }
-        <div
-          class='footer-button group flex h-8 w-9 cursor-pointer items-center justify-center rounded-md text-skin-hue hover:bg-skin-button-accent hover:text-skin-inverted max-sm:hidden print:hidden [&>span]:hover:text-skin-inverted'>
-          <Icon name='ri:command-fill' class='h-5 w-5' />
-        </div>
       </footer>
     </div>
     <figure class='relative w-fit print:hidden'>
-      <Image class='shadow-skin-hues shadow-lg' height={600} width={600} src={image} alt={name} />
+      <Image class='profile-img shadow-skin-hues shadow-lg' height={600} width={600} src={image} alt={name} />
       <div class='pointer-events-none absolute -inset-2'>
         <div
           class='absolute -inset-y-8 right-0 w-px bg-skin-hue/50 [mask-image:linear-gradient(to_top,transparent,white_4rem,white_calc(100%-4rem),transparent)]'>
@@ -105,6 +101,15 @@ const { city, region, address } = location
   footer a,
   footer button {
     @apply inline-flex size-8 items-center justify-center rounded-md p-1 text-skin-hue transition-all duration-500 ease-linear hover:bg-skin-button-accent hover:text-skin-inverted;
+  }
+
+  .profile-img {
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    width: 8rem;
+    height: 8rem;
+    display: block;
   }
 
   @media (width <= 700px) {
