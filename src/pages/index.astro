@@ -22,13 +22,14 @@ enum PageLayout {
 
 <Layout title={`${name}'s' Portfolio - ${label}`}>
   <main
-    class="relative grid h-full max-w-7xl gap-12 p-8 max-sm:py-16 md:min-h-screen md:grid-cols-6 md:p-16 xl:gap-24 print:max-w-none print:grid-cols-1 print:gap-6"
+    class="relative grid h-full max-w-7xl gap-20 p-8 max-sm:py-16 md:min-h-screen md:grid-cols-6 md:p-16 xl:gap-24 print:max-w-none print:grid-cols-1 print:gap-6"
   >
     <div
       class="slide-enter space-y-6 ease-in md:col-span-2 print:col-span-1 print:grid print:grid-cols-2 print:gap-5 print:space-y-0"
     >
       <Hero />
       <About />
+      <Skills className="print:hidden" />
       <ThemeSwitch />
     </div>
     <div
@@ -40,7 +41,6 @@ enum PageLayout {
           <>
             <Experience className="print:col-span-3" />
             {CV?.education && <Education className="order-first" />}
-            <Skills className="print:hidden" />
           </>
         )
       }
