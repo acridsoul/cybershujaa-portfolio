@@ -1,0 +1,78 @@
+---
+import Section from "../Section.astro";
+import { Icon } from "astro-icon/components";
+import { labChallenges } from "@cv";
+import { Image } from "astro:assets";
+---
+
+<Section className={Astro.props.className} title="Lab Challenges">
+  <div class="flex flex-col gap-3">
+    {labChallenges?.map((challenge, idx) => (
+      <div class="rounded-md bg-skin-button-muted/50 shadow-sm ring-1 ring-skin-muted">
+        <button
+          type="button"
+          class="w-full flex items-center justify-between p-4 text-left font-semibold focus:outline-none"
+          aria-expanded="false"
+          aria-controls={`panel-${idx}`}
+          data-accordion-toggle
+        >
+          <span>
+            <Icon name="mdi:flag-outline" class="size-4 mr-2" />
+            {challenge.title}
+            <span class="ml-2 text-xs text-skin-muted">({challenge.platform})</span>
+          </span>
+          <span class="accordion-icon">
+            <Icon name="mdi:plus" class="icon-plus" />
+            <Icon name="mdi:minus" class="icon-minus hidden" />
+          </span>
+        </button>
+        <div
+          id={`panel-${idx}`}
+          class="accordion-panel hidden px-4 pb-4"
+        >
+          <div class="py-2 text-sm">
+            <strong>Problem:</strong> {challenge.problem}
+          </div>
+          <div class="pb-2 text-sm">
+            <strong>Approach:</strong> {challenge.approach}
+          </div>
+          <div class="pb-2 text-sm">
+            <strong>Tools Used:</strong> {challenge.tools.join(", ")}
+          </div>
+          {challenge.screenshots?.length > 0 && (
+            <div class="flex flex-wrap gap-2 py-2">
+              {challenge.screenshots.map((shot) => (
+                <a href={shot.src} data-fancybox="lab-challenges" data-caption={shot.alt} class="block aspect-video w-32">
+                  <Image src={shot.src} alt={shot.alt} width={128} height={72} class="object-cover rounded" />
+                </a>
+              ))}
+            </div>
+          )}
+          <div class="pt-2 text-sm">
+            <strong>Lessons Learned:</strong>
+            <ul class="ml-4 list-disc">
+              {challenge.lessons.map((lesson) => <li>{lesson}</li>)}
+            </ul>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</Section>
+
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll("[data-accordion-toggle]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const panel = btn.parentElement.querySelector(".accordion-panel");
+        const plus = btn.querySelector(".icon-plus");
+        const minus = btn.querySelector(".icon-minus");
+        const expanded = btn.getAttribute("aria-expanded") === "true";
+        btn.setAttribute("aria-expanded", !expanded);
+        panel.classList.toggle("hidden");
+        plus.classList.toggle("hidden");
+        minus.classList.toggle("hidden");
+      });
+    });
+  });
+</script> 

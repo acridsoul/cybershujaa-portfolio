@@ -8,6 +8,8 @@ import Projects from "@/components/sections/Projects.astro";
 import Skills from "@/components/sections/Skills.astro";
 import Tail from "@/components/sections/Tail.astro";
 import ThemeSwitch from "@/components/ThemeSwitch.astro";
+import LabChallenges from "@/components/sections/LabChallenges.astro";
+import Images from "@/components/sections/Images.astro";
 
 import CV, { basics } from "@cv";
 import Education from "@/components/sections/Education.astro";
@@ -36,10 +38,12 @@ enum PageLayout {
       class="slide-enter-content space-y-12 md:col-span-4 print:col-span-1 print:grid print:grid-cols-4 print:gap-2 print:space-y-0"
     >
       <Projects className="print:hidden" />
+      {/* Experience and then LabChallenges */}
       {
         (CV?.pageLayout === PageLayout.TwoColumn || !CV?.pageLayout) && (
           <>
             <Experience className="print:col-span-3" />
+            <LabChallenges className="print:hidden" />
             {CV?.education && <Education className="order-first" />}
           </>
         )
@@ -54,6 +58,9 @@ enum PageLayout {
           <main class="relative grid max-w-[82rem] gap-12 p-8 max-sm:py-16 md:grid-cols-6 md:p-16 xl:gap-24 print:max-w-none print:grid-cols-1 print:gap-6">
             <div class="slide-enter-content space-y-6 md:col-span-6">
               <Projects className="print:hidden" />
+              {/* Experience and then LabChallenges */}
+              <Experience className="print:col-span-3" />
+              <LabChallenges className="print:hidden" />
               {CV?.education && <Education className="order-first" />}
               <Skills className="print:hidden" />
             </div>
@@ -68,6 +75,9 @@ enum PageLayout {
             >
               <div class="flex space-x-0 pb-4 max-md:gap-4 max-sm:flex-col max-sm:space-y-4 md:px-4">
                 <Projects className="flex-shrink-0 w-full print:hidden border-skin-hue md:border-solid md:border md:p-4" />
+                {/* Experience and then LabChallenges */}
+                <Experience className="flex-shrink-0 w-full print:hidden border-skin-hue md:border-solid md:border md:p-4" />
+                <LabChallenges className="flex-shrink-0 w-full print:hidden border-skin-hue md:border-solid md:border md:p-4" />
                 {CV?.images && (
                   <Images className="flex-shrink-0 w-full print:hidden border-skin-hue md:border-solid md:border md:p-4" />
                 )}
