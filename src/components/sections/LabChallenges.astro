@@ -4,6 +4,32 @@ import { Icon } from "astro-icon/components";
 import CV from "@cv";
 import { Image } from "astro:assets";
 const { labChallenges } = CV;
+
+/**
+ * Types for labChallenges and levels
+ */
+/**
+ * @typedef {Object} Level
+ * @property {number} level
+ * @property {string} title
+ * @property {string} problem
+ * @property {string} approach
+ * @property {string[]} exampleExploit
+ * @property {string[]} lessons
+ */
+/**
+ * @typedef {Object} Challenge
+ * @property {string} title
+ * @property {string} platform
+ * @property {string} [githubUrl]
+ * @property {string} problem
+ * @property {string} approach
+ * @property {string[]} tools
+ * @property {{description: string, code: string}[]} [codeSamples]
+ * @property {string[]} lessons
+ * @property {Level[]} [levels]
+ * @property {{src: string, alt: string}[]} [screenshots]
+ */
 ---
 
 <Section className={Astro.props.className} title="Lab Challenges">
@@ -47,35 +73,22 @@ const { labChallenges } = CV;
                   <div class="pb-2 text-sm">
                     <strong>Approach:</strong> {level.approach}
                   </div>
-                  <div class="pb-2 text-sm">
-                    <strong>Tools Used:</strong> {(level.tools || challenge.tools).join(", ")}
-                  </div>
-                  {level.codeSamples && level.codeSamples.length > 0 && (
+                  {level.exampleExploit && level.exampleExploit.length > 0 && (
                     <div class="pt-2 text-sm">
-                      <strong>Key Code Samples:</strong>
+                      <strong>Example Exploits:</strong>
                       <ul class="ml-4 mt-2 flex flex-col gap-3">
-                        {level.codeSamples.map(sample => (
+                        {level.exampleExploit.map((exploit: string) => (
                           <li>
-                            <div class="mb-1 font-mono text-xs text-skin-muted">{sample.description}</div>
-                            <pre class="overflow-x-auto rounded bg-skin-fill p-2 text-xs text-skin-base"><code>{sample.code}</code></pre>
+                            <pre class="overflow-x-auto rounded bg-skin-fill p-2 text-xs text-skin-base"><code>{exploit}</code></pre>
                           </li>
                         ))}
                       </ul>
                     </div>
                   )}
-                  {level.screenshots?.length > 0 && (
-                    <div class="flex flex-wrap gap-2 py-2">
-                      {level.screenshots.map((shot) => (
-                        <a href={shot.src} data-fancybox="lab-challenges" data-caption={shot.alt} class="block aspect-video w-32">
-                          <Image src={shot.src} alt={shot.alt} width={128} height={72} class="object-cover rounded" />
-                        </a>
-                      ))}
-                    </div>
-                  )}
                   <div class="pt-2 text-sm">
                     <strong>Lessons Learned:</strong>
                     <ul class="ml-4 list-disc">
-                      {level.lessons.map((lesson) => <li>{lesson}</li>)}
+                      {level.lessons.map((lesson: string) => <li>{lesson}</li>)}
                     </ul>
                   </div>
                 </div>
@@ -96,7 +109,7 @@ const { labChallenges } = CV;
                 <div class="pt-2 text-sm">
                   <strong>Key Code Samples:</strong>
                   <ul class="ml-4 mt-2 flex flex-col gap-3">
-                    {challenge.codeSamples.map(sample => (
+                    {challenge.codeSamples.map((sample: {description: string, code: string}) => (
                       <li>
                         <div class="mb-1 font-mono text-xs text-skin-muted">{sample.description}</div>
                         <pre class="overflow-x-auto rounded bg-skin-fill p-2 text-xs text-skin-base"><code>{sample.code}</code></pre>
@@ -105,9 +118,9 @@ const { labChallenges } = CV;
                   </ul>
                 </div>
               )}
-              {challenge.screenshots?.length > 0 && (
+              {"screenshots" in challenge && Array.isArray(challenge.screenshots) && challenge.screenshots.length > 0 && (
                 <div class="flex flex-wrap gap-2 py-2">
-                  {challenge.screenshots.map((shot) => (
+                  {challenge.screenshots.map((shot: {src: string, alt: string}) => (
                     <a href={shot.src} data-fancybox="lab-challenges" data-caption={shot.alt} class="block aspect-video w-32">
                       <Image src={shot.src} alt={shot.alt} width={128} height={72} class="object-cover rounded" />
                     </a>
@@ -117,7 +130,7 @@ const { labChallenges } = CV;
               <div class="pt-2 text-sm">
                 <strong>Lessons Learned:</strong>
                 <ul class="ml-4 list-disc">
-                  {challenge.lessons.map((lesson) => <li>{lesson}</li>)}
+                  {challenge.lessons.map((lesson: string) => <li>{lesson}</li>)}
                 </ul>
               </div>
             </>
