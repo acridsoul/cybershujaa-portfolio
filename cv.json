@@ -52,19 +52,14 @@
   ],
   "certificates": [
     {
-      "name": "Security Analyst Specialist",
-      "date": "2022-07-01",
+      "name": "Cisco Ethical Hacker Certificate",
+      "date": "2025-01-01",
       "issuer": "Cyber Shujaa"
     },
     {
-      "name": "Ethical Hacking",
-      "date": "2022-01-01",
-      "issuer": "Udemy"
-    },
-    {
-      "name": "Certified CyberOps Associate",
-      "date": "2021-11-01",
-      "issuer": "Cisco"
+      "name": "Web Security Certificate",
+      "date": "2025-01-01",
+      "issuer": "Linux Foundation"
     }
   ],
   "work": [
@@ -337,18 +332,118 @@
       ]
     },
     {
-      "title": "PortSwigger: SQL Injection Lab",
-      "platform": "PortSwigger",
-      "problem": "Exploit a SQL injection vulnerability to extract user data from a web application.",
-      "approach": "Identified injectable parameters, crafted payloads to bypass authentication, and extracted sensitive data from the database.",
-      "tools": ["Burp Suite", "SQLMap", "Browser DevTools"],
-      "screenshots": [
-        { "src": "/images/portswigger-sql-1.png", "alt": "Burp Suite intercepting request" }
+      "title": "Web Security Challenges (CTF Walkthrough)",
+      "platform": "pwn.college challenges",
+      "problem": "A series of escalating web security challenges covering path traversal, command injection, authentication logic flaws, and multiple forms of SQL injection.",
+      "approach": "Solved each level by identifying and exploiting vulnerabilities, using a combination of manual testing, code review, and automation scripts. Each level required a different attack vector and demonstrated a unique security lesson.",
+      "tools": [
+        "curl",
+        "Python requests library",
+        "Source code review",
+        "Knowledge of SQL and SQLite",
+        "Automation scripts"
       ],
-      "lessons": [
-        "How to identify and exploit SQL injection points.",
-        "The importance of input validation and parameterized queries.",
-        "Using automated tools to streamline exploitation."
+      "levels": [
+        {
+          "level": 1,
+          "title": "Path Traversal",
+          "problem": "Bypass file access restrictions to read sensitive files on the server using path traversal.",
+          "approach": "Manipulated the URL path and used the 'path' argument to access /etc/passwd and /flag.",
+          "exampleExploit": [
+            "curl http://challenge.localhost:80?path=/../../../etc/passwd --path-as-is -i",
+            "curl http://challenge.localhost:80?path=/../../../flag --path-as-is -i"
+          ],
+          "lessons": [
+            "Path traversal vulnerabilities can be exploited by manipulating URL parameters.",
+            "Servers may leak information about required parameters in error messages.",
+            "Always validate and sanitize user input on the server side."
+          ]
+        },
+        {
+          "level": 2,
+          "title": "Command Injection",
+          "problem": "Exploit a command injection vulnerability to execute arbitrary commands and retrieve the flag.",
+          "approach": "Injected shell commands using ; to chain commands via the timezone parameter.",
+          "exampleExploit": [
+            "curl --path-as-is \"http://challenge.localhost:80?timezone=whoami;id;\"",
+            "Python requests: url = 'http://challenge.localhost:80?timezone=who;cat /flag;'"
+          ],
+          "lessons": [
+            "Unsanitized input passed to shell commands can lead to command injection.",
+            "Error messages and stack traces can reveal how input is processed.",
+            "Always use parameterized APIs or proper input validation when invoking system commands."
+          ]
+        },
+        {
+          "level": 3,
+          "title": "Authentication Logic Flaw",
+          "problem": "Bypass authentication to access the flag by exploiting logic flaws in user ID handling.",
+          "approach": "Analyzed the source code and accessed the endpoint directly with ?user=1.",
+          "exampleExploit": [
+            "curl http://challenge.localhost:80?user=1"
+          ],
+          "lessons": [
+            "User IDs in URLs can be manipulated to access other users’ data.",
+            "Never trust user-supplied identifiers without proper authorization checks."
+          ]
+        },
+        {
+          "level": 4,
+          "title": "SQL Injection (Login Bypass)",
+          "problem": "Exploit SQL injection in the login form to bypass authentication and access the flag.",
+          "approach": "Used payloads like flag\" -- and \" or 1=1-- to bypass password checks.",
+          "exampleExploit": [
+            "Python requests: username=\" or 1=1--, password=admin",
+            "Python requests: username=flag\" --, password=admin"
+          ],
+          "lessons": [
+            "String interpolation in SQL queries is highly dangerous.",
+            "Always use parameterized queries to prevent SQL injection."
+          ]
+        },
+        {
+          "level": 5,
+          "title": "SQL Injection (Data Extraction)",
+          "problem": "Extract sensitive data from the database using SQL injection in a search parameter.",
+          "approach": "Exploited the LIKE clause and used UNION SELECT to extract the flag.",
+          "exampleExploit": [
+            "Python requests: query=f% (enumerate users)",
+            "Python requests: query=\" UNION SELECT password FROM users -- (extract flag)"
+          ],
+          "lessons": [
+            "Even seemingly harmless search features can be vulnerable to SQL injection.",
+            "UNION-based SQL injection can be used to extract arbitrary data."
+          ]
+        },
+        {
+          "level": 6,
+          "title": "SQL Injection with Unknown Table Name",
+          "problem": "Extract the flag from a table with an unknown, dynamically generated name.",
+          "approach": "Enumerated table names via sqlite_master, then extracted the flag from the discovered table.",
+          "exampleExploit": [
+            "Python requests: query=\" UNION SELECT tbl_name FROM sqlite_master -- (discover table)",
+            "Python requests: query=\" UNION SELECT password FROM table6108655952227085405 ; -- (extract flag)"
+          ],
+          "lessons": [
+            "SQL injection can be used to enumerate database schema.",
+            "Understanding the underlying database system helps in crafting effective attacks."
+          ]
+        },
+        {
+          "level": 7,
+          "title": "Blind SQL Injection",
+          "problem": "Extract the flag using blind SQL injection, where no direct error or data is returned.",
+          "approach": "Tested for password characters one by one using LIKE and GLOB, automated with a Python script.",
+          "exampleExploit": [
+            "Python requests: username=flag \" OR password  LIKE \"p%\" -- -",
+            "Automated brute-force with Python and string module"
+          ],
+          "lessons": [
+            "Blind SQL injection requires creative use of application responses to infer data.",
+            "Automating attacks can save significant time in blind scenarios.",
+            "GLOB can be used for case-sensitive matching in SQLite."
+          ]
+        }
       ]
     }
   ]

@@ -6,7 +6,7 @@ This guide will walk you through deploying your Astro static site (portfolio) to
 
 ## 1. Prerequisites
 - DigitalOcean account
-- Domain name (e.g., yourdomain.com)
+- Domain name: **portfolio.githinji.dev**
 - SSH key (recommended for secure login)
 - Basic familiarity with the terminal
 
@@ -65,7 +65,7 @@ This guide will walk you through deploying your Astro static site (portfolio) to
    pnpm install
    pnpm build
    ```
-   The static site will be generated in the `dist/` folder.
+   The static site will be generated in the `/root/cybershujaa-portfolio/dist` folder.
 
 ---
 
@@ -83,12 +83,12 @@ This guide will walk you through deploying your Astro static site (portfolio) to
      ```sh
      sudo nano /etc/nginx/sites-available/astro-portfolio
      ```
-   - Paste the following (replace `yourdomain.com` and path as needed):
+   - Paste the following (replace the root path if your project is elsewhere):
      ```nginx
      server {
          listen 80;
-         server_name yourdomain.com www.yourdomain.com;
-         root /home/youruser/your-astro-portfolio/dist;
+         server_name portfolio.githinji.dev www.portfolio.githinji.dev;
+         root /root/cybershujaa-portfolio/dist;
          index index.html;
 
          location / {
@@ -106,7 +106,7 @@ This guide will walk you through deploying your Astro static site (portfolio) to
 ---
 
 ## 6. Point Your Domain to the Droplet
-- In your domain registrar's DNS settings, set an A record for `yourdomain.com` pointing to your droplet's public IP.
+- In your domain registrar's DNS settings, set an A record for **portfolio.githinji.dev** pointing to your droplet's public IP.
 - Wait for DNS propagation (can take a few minutes to a few hours).
 
 ---
@@ -118,7 +118,7 @@ This guide will walk you through deploying your Astro static site (portfolio) to
    ```
 2. **Obtain and install certificate:**
    ```sh
-   sudo certbot --nginx -d yourdomain.com -d www.yourdomain.com
+   sudo certbot --nginx -d portfolio.githinji.dev -d www.portfolio.githinji.dev
    ```
    - Follow prompts to allow Certbot to configure HTTPS for you.
    - Test auto-renewal:
@@ -132,7 +132,7 @@ This guide will walk you through deploying your Astro static site (portfolio) to
 - Use GitHub Actions or rsync/SFTP to automate pushing new builds to your server.
 - For manual updates:
   ```sh
-  cd your-astro-portfolio
+  cd /root/cybershujaa-portfolio
   git pull
   pnpm install
   pnpm build
@@ -167,4 +167,4 @@ This guide will walk you through deploying your Astro static site (portfolio) to
 
 ---
 
-**You’re done! Your Astro portfolio is now live and secure on your DigitalOcean droplet.** 
+**You’re done! Your Astro portfolio is now live and secure on your DigitalOcean droplet at https://portfolio.githinji.dev.** 
