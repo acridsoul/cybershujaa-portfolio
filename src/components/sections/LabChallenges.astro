@@ -7,7 +7,7 @@ import { Image } from "astro:assets";
 
 <Section className={Astro.props.className} title="Lab Challenges">
   <div class="flex flex-col gap-3">
-    {labChallenges?.map((challenge, idx) => (
+    {labChallenges.map((challenge, idx) => (
       <div class="rounded-md bg-skin-button-muted/50 shadow-sm ring-1 ring-skin-muted">
         <button
           type="button"
@@ -16,10 +16,15 @@ import { Image } from "astro:assets";
           aria-controls={`panel-${idx}`}
           data-accordion-toggle
         >
-          <span>
-            <Icon name="mdi:flag-outline" class="size-4 mr-2" />
+          <span class="flex items-center gap-2">
+            <Icon name="mdi:flag-outline" class="size-4" />
             {challenge.title}
             <span class="ml-2 text-xs text-skin-muted">({challenge.platform})</span>
+            {challenge.githubUrl && challenge.platform === 'Studocu.com' && (
+              <a href={challenge.githubUrl} target="_blank" rel="noopener noreferrer" title="View related GitHub project">
+                <Icon name="mdi:github" class="size-4 ml-1 opacity-70 hover:opacity-100 transition" />
+              </a>
+            )}
           </span>
           <span class="accordion-icon">
             <Icon name="mdi:plus" class="icon-plus" />
@@ -30,30 +35,92 @@ import { Image } from "astro:assets";
           id={`panel-${idx}`}
           class="accordion-panel hidden px-4 pb-4"
         >
-          <div class="py-2 text-sm">
-            <strong>Problem:</strong> {challenge.problem}
-          </div>
-          <div class="pb-2 text-sm">
-            <strong>Approach:</strong> {challenge.approach}
-          </div>
-          <div class="pb-2 text-sm">
-            <strong>Tools Used:</strong> {challenge.tools.join(", ")}
-          </div>
-          {challenge.screenshots?.length > 0 && (
-            <div class="flex flex-wrap gap-2 py-2">
-              {challenge.screenshots.map((shot) => (
-                <a href={shot.src} data-fancybox="lab-challenges" data-caption={shot.alt} class="block aspect-video w-32">
-                  <Image src={shot.src} alt={shot.alt} width={128} height={72} class="object-cover rounded" />
-                </a>
+          {challenge.levels ? (
+            <div class="flex flex-col gap-6">
+              {challenge.levels.map((level, lidx) => (
+                <div class="border-b last:border-b-0 border-skin-muted pb-4 mb-4 last:pb-0 last:mb-0">
+                  <div class="py-2 text-sm font-bold">Level {level.level}: {level.title}</div>
+                  <div class="py-2 text-sm">
+                    <strong>Problem:</strong> {level.problem}
+                  </div>
+                  <div class="pb-2 text-sm">
+                    <strong>Approach:</strong> {level.approach}
+                  </div>
+                  <div class="pb-2 text-sm">
+                    <strong>Tools Used:</strong> {(level.tools || challenge.tools).join(", ")}
+                  </div>
+                  {level.codeSamples && level.codeSamples.length > 0 && (
+                    <div class="pt-2 text-sm">
+                      <strong>Key Code Samples:</strong>
+                      <ul class="ml-4 mt-2 flex flex-col gap-3">
+                        {level.codeSamples.map(sample => (
+                          <li>
+                            <div class="mb-1 font-mono text-xs text-skin-muted">{sample.description}</div>
+                            <pre class="overflow-x-auto rounded bg-skin-fill p-2 text-xs text-skin-base"><code>{sample.code}</code></pre>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  {level.screenshots?.length > 0 && (
+                    <div class="flex flex-wrap gap-2 py-2">
+                      {level.screenshots.map((shot) => (
+                        <a href={shot.src} data-fancybox="lab-challenges" data-caption={shot.alt} class="block aspect-video w-32">
+                          <Image src={shot.src} alt={shot.alt} width={128} height={72} class="object-cover rounded" />
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                  <div class="pt-2 text-sm">
+                    <strong>Lessons Learned:</strong>
+                    <ul class="ml-4 list-disc">
+                      {level.lessons.map((lesson) => <li>{lesson}</li>)}
+                    </ul>
+                  </div>
+                </div>
               ))}
             </div>
+          ) : (
+            <>
+              <div class="py-2 text-sm">
+                <strong>Problem:</strong> {challenge.problem}
+              </div>
+              <div class="pb-2 text-sm">
+                <strong>Approach:</strong> {challenge.approach}
+              </div>
+              <div class="pb-2 text-sm">
+                <strong>Tools Used:</strong> {challenge.tools.join(", ")}
+              </div>
+              {challenge.codeSamples && challenge.codeSamples.length > 0 && (
+                <div class="pt-2 text-sm">
+                  <strong>Key Code Samples:</strong>
+                  <ul class="ml-4 mt-2 flex flex-col gap-3">
+                    {challenge.codeSamples.map(sample => (
+                      <li>
+                        <div class="mb-1 font-mono text-xs text-skin-muted">{sample.description}</div>
+                        <pre class="overflow-x-auto rounded bg-skin-fill p-2 text-xs text-skin-base"><code>{sample.code}</code></pre>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {challenge.screenshots?.length > 0 && (
+                <div class="flex flex-wrap gap-2 py-2">
+                  {challenge.screenshots.map((shot) => (
+                    <a href={shot.src} data-fancybox="lab-challenges" data-caption={shot.alt} class="block aspect-video w-32">
+                      <Image src={shot.src} alt={shot.alt} width={128} height={72} class="object-cover rounded" />
+                    </a>
+                  ))}
+                </div>
+              )}
+              <div class="pt-2 text-sm">
+                <strong>Lessons Learned:</strong>
+                <ul class="ml-4 list-disc">
+                  {challenge.lessons.map((lesson) => <li>{lesson}</li>)}
+                </ul>
+              </div>
+            </>
           )}
-          <div class="pt-2 text-sm">
-            <strong>Lessons Learned:</strong>
-            <ul class="ml-4 list-disc">
-              {challenge.lessons.map((lesson) => <li>{lesson}</li>)}
-            </ul>
-          </div>
         </div>
       </div>
     ))}

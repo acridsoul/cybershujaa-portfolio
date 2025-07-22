@@ -40,31 +40,6 @@
       "police": "赣公网安备 36010302000349号"
     }
   },
-  "images": {
-    "intro": "Photography is the art of light, and images are the contours of memory.",
-    "list": [
-      {
-        "image": "https://i0.hdslb.com/bfs/article/6720a7355fd11b9666e2716cadf04e45480025691.jpg@90q_1e_1c.webp",
-        "alt": "Sunset in Nanchang",
-        "desc": "Shot on a sunny day in Nanchang. 2024.10.05"
-      },
-      {
-        "image": "https://i0.hdslb.com/bfs/article/82f680f56532d942f74d86801abf49ea480025691.jpg@90q_1e_1c.webp",
-        "alt": "My Cat",
-        "desc": "A Ragdoll cat who stayed for a year. She's a girl."
-      },
-      {
-        "image": "https://i0.hdslb.com/bfs/article/14e6ae3c368b0eddeeb2b5c338239486480025691.jpg@90q_1e_1c.webp",
-        "alt": "Emoji",
-        "desc": "True, dude"
-      },
-      {
-        "image": "https://i0.hdslb.com/bfs/article/fe1737e9d7b6c2b21eedaf60b6dc9f86480025691.jpg@90q_1e_1c.webp",
-        "alt": "Cat Kernel Crashed",
-        "desc": "Cat Kernel Crashed"
-      }
-    ]
-  },
   "education": [
     {
       "institution": "Mount Kenya University",
@@ -343,34 +318,22 @@
   ],
   "labChallenges": [
     {
-      "title": "HackTheBox: Blue",
-      "platform": "HackTheBox",
-      "problem": "Gain access to a vulnerable Windows machine and retrieve the flag.",
-      "approach": "Performed network scanning, identified SMB vulnerability, exploited with Metasploit, and escalated privileges to access the flag.",
-      "tools": ["nmap", "Metasploit", "smbclient"],
-      "screenshots": [
-        { "src": "/images/htb-blue-1.png", "alt": "Nmap scan results" },
-        { "src": "/images/htb-blue-2.png", "alt": "Metasploit session" }
+      "title": "Studocu.com Document Access Vulnerability",
+      "platform": "Studocu.com",
+      "githubUrl": "https://github.com/danieltyukov/studocuhack",
+      "problem": "Studocu.com restricts access to premium documents using overlays, CSS blurring, and download prevention. However, a vulnerability allows users to bypass these restrictions and download premium content without authentication or payment. The 'Studocuhack' browser extension demonstrates how these client-side controls can be circumvented, exposing premium documents to unauthorized access.",
+      "approach": "The extension exploits weaknesses in the client-side implementation by removing premium banners and overlays, unblurring document pages, monitoring the DOM in real-time to remove dynamically loaded restrictions, and injecting a button to generate a print-friendly, downloadable version of the document.",
+      "tools": ["JavaScript DOM APIs", "MutationObserver", "CSS injection", "Browser Extension APIs"],
+      "codeSamples": [
+        {"description": "Remove Premium Banners", "code": "const premiumBanner = document.querySelector('[class*=\"PremiumBannerBlobWrapper_preview-banner\"]');\nif (premiumBanner) premiumBanner.remove();"},
+        {"description": "Unblur Document Pages", "code": "document.querySelectorAll('.page-content').forEach(page => {\n    page.style.filter = 'none';\n});"},
+        {"description": "Real-Time DOM Monitoring", "code": "const observer = new MutationObserver((mutations) => {\n  mutations.forEach((mutation) => {\n    mutation.addedNodes.forEach((node) => {\n      if (node.nodeType === Node.ELEMENT_NODE && node.matches('[class*=\"PremiumBannerBlobWrapper\"]')) {\n        setTimeout(removePremiumBanner, 100);\n      }\n    });\n  });\n});\nobserver.observe(document.body, { childList: true, subtree: true });"},
+        {"description": "Enable Document Download", "code": "function createDownloadButton() {\n    let downloadBtn = document.createElement(\"button\");\n    downloadBtn.addEventListener('click', generatePDF);\n    return downloadBtn;\n}"}
       ],
       "lessons": [
-        "Importance of enumeration before exploitation.",
-        "How SMB vulnerabilities can be leveraged for initial access.",
-        "Privilege escalation techniques on Windows."
-      ]
-    },
-    {
-      "title": "Cisco CyberOps: Packet Tracer Challenge",
-      "platform": "Cisco",
-      "problem": "Analyze network traffic to identify and mitigate a simulated attack.",
-      "approach": "Used Packet Tracer to simulate network, captured traffic, identified malicious packets, and applied ACLs to block the attacker.",
-      "tools": ["Cisco Packet Tracer", "Wireshark", "Access Control Lists (ACLs)"],
-      "screenshots": [
-        { "src": "/images/cisco-pt-1.png", "alt": "Packet Tracer topology" }
-      ],
-      "lessons": [
-        "Hands-on experience with network traffic analysis.",
-        "Configuring and applying ACLs for network defense.",
-        "Recognizing attack patterns in packet captures."
+        "Client-side controls are insufficient for protecting premium content. Any content delivered to the browser can be accessed by users, regardless of UI restrictions.",
+        "Robust server-side access control is essential to prevent unauthorized access and downloading of premium documents.",
+        "Security through obscurity (e.g., overlays, CSS blurring) does not provide real protection against determined attackers with basic web development knowledge."
       ]
     },
     {
